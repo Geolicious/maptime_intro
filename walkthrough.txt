@@ -1,0 +1,44 @@
+maptime
+
+EInführung QGIS:
+
+Arbeiten mit Vektor und Rasterdaten
+  -Styling Vektordaten
+  -Editierung Vektordaten
+  -Abspeichern Subset und hinzufügen zur Karte (der wird dann mit qgis2web exportiert)
+  -Styling Rasterdaten
+  -MapComposer (?)
+Erstellung eigener Webmaps mithilfe von QGIS2web
+Errecihbarkeitsanalysen mithilfe von OSMroute plugin
+Openlayersplugin zur Unterstützung der Datenvisualisierung
+Querschnitte von Rasterdaten mithilfe von QProfile
+
+
+1) Wieviele Menschen sind weltweit vom Sea-Level-Rise betroffen?
+2) Das Wetter wird immer  unstabiler und Unwetter häufiger. Wieviel % der Fläche in Deutschland ist von Hangrutschung potentiell gefährdet?
+
+Datensätze:
+NaturalEarthdata der cities mit dem höhenwert aus GMTED verschneiden und nur den Namen, #population und Höhe und Staat den Usern zur verfügung stellen.
+
+für die zweiter AUfgabe einmal Ländergrenze von Deutschland und den SRTM3 Datensatz zurechtgeschnitten
+
+Workflow für eins:
+- Laden des Datensatzes cities.shp
+- Hinzufügen des Openlayers Hintergrunds (Plugin 1: openlayers)
+- Styling der Städte mit value Pop
+- Styling der Städte nach Höhe (Kategorisiert)
+- Select by height <2m
+- export als eigener Datensatz
+- Styling anpassen und Export mit QGIS2web (Plugin #2)
+
+Workflow für zwei:
+- Einlesen des Raster und Vektrodatensatzes
+- sensibilisieren: nur weil grau heißt es nicht, dass alle Werte gleich sind!
+- Kontrasteinstellung wählen
+- Profile mit QProfile Tools
+- Clip des Rasters anhand der Grenzen Deutschlands (mit den QGIS bordeigenen Mitteln, nicht GDAL!)
+- Ableitungen rechnen: 1. Slope, Aspect.
+- Hinzufügen der Ableitungen als eigene layer.
+- verschneiden des Aspects mit DEM zu einem schönen Hillshade (schön) oder das Hillshade direkt in QGIS rechnen (hässlich)
+- reklassifizieren mit gdal r.reclass (reclass.txt habe ich bereits)
+- reporten mit r.report und Fläche errechnen mithilfe der Cellsize --> Properties of the layer
